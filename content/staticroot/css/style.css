@@ -1,0 +1,101 @@
+@import url(http://fonts.googleapis.com/css?family=Fira+Sans);
+
+#catalogbar, .dropdown-menu {
+	background: #FF6600;
+}
+
+#catalogbar a, .dropdown-menu a {
+	color: #FFF;
+}
+
+#catalogbar a:hover, .dropdown-menu a:hover {
+	background: #FF6633;
+}
+
+.open {
+	background: #FF6633;
+}
+
+.open a:hover {
+	background: #FF6633;	
+	color: #FFF;
+}
+
+body {
+	background: url("/static/images/bg3.jpg");
+	font-family: 'Fira Sans', sans-serif;
+}
+
+/** Thumbnail carousel */
+
+.listcarousel .carousel {
+	margin-bottom: 0;
+	padding: 0 40px 30px 40px;
+}
+
+.listcarousel .carousel-control.left {
+	left: -60px;
+	background: none;
+}
+.listcarousel .carousel-control.right {
+	right: -60px;
+	background: none;
+}
+
+.listcarousel .carousel-indicators {
+	right: 50%;
+	top: auto;
+	bottom: 0px;
+	margin-right: -19px;
+}
+
+.listcarousel .carousel-indicators li {
+	/*background: #c0c0c0;*/
+}
+
+.listcarousel .carousel-indicators .active {
+	/*background: #333333;*/
+}
+
+/** End of thumbnail carousel */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+
+.productbox {
+    background-color:#ffffff;
+	padding:10px;
+	margin-bottom:10px;
+	-webkit-box-shadow: 0 8px 6px -6px  #999;
+    -moz-box-shadow: 0 8px 6px -6px  #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+
+.producttitle {
+    font-weight:bold;
+	padding:5px 0 5px 0;
+}
+
+.productprice {
+	border-top:1px solid #dadada;
+	padding-top:5px;
+}
+
+.pricetext {
+	font-weight:bold;
+	font-size:1.4em;
+}
