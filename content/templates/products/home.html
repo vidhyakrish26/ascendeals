@@ -35,98 +35,191 @@
 <!-- end of carousel -->
 
 <!-- coupons carousel -->
-<div class="listcarousel container">
-	<h2 class="text-success">Latest Coupons</h2>
-	<hr/>
-	<div class="carousel slide" id="couponcarousel">
-		<div class="carousel-inner">
-		<!-- sample thumbnail carousel images -->
-		    <div class="item active">
-		        <div class="row">
-				{% for product in latest_coupons %}
-						<div class="col-md-3 column productbox thumbnail">
-							{% for img in product.productimage_set.all %}
-								{% if img.featured %}
-							    	<img src="{{ MEDIA_URL }}{{ img.image }}" class="img-responsive" alt="{{ product.title }}"/>
-								{% endif %}
-						    {% endfor %}
-						    <div class="producttitle">{{ product.title }}</div>
-						    <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">ADD TO CART</a></div><div class="pricetext"> &#8377; {{ product.price }}</div></div>
-						</div>
-						{% cycle "" "" "" "</div></div><div class='item'><div class='row'>" %}
-					{% endfor %} 	
-			        </div><!--/row-fluid-->
-			    </div><!--/item-->
-			<!-- end of sample thumbnail carousel images -->    
-		</div><!-- end of carousel inner -->
-
-	    <a class="left carousel-control" href="#couponcarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-	    <a class="right carousel-control" href="#couponcarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>		
-	</div><!-- end of carousel -->
-</div><!-- end of list carousel -->
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-9">
+                <h3 class="text-success">Latest coupons</h3>
+            </div>
+            <div class="col-md-3">
+                <!-- Controls -->
+                <div class="controls pull-right hidden-xs">
+                    <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example"
+                        data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example"
+                            data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                    	{% for product in latest_coupons %}
+                        <div class="col-sm-3">
+                            <div class="col-item">
+                                <div class="photo">
+                                	{% for img in product.productimage_set.all %}
+                                		{% if img.featured %}
+                                    	<img src="{{ MEDIA_URL }}{{ img.image }}" class="img-responsive" alt="{{ product.title }}" />
+                                		{% endif %}
+                                	{% endfor %}
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-md-12">
+                                            <h5>{{ product.title }}</h5>
+                                            <h5 class="price-text-color">&#8377; {{ product.price }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add">
+                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="btn btn-primary btn-sm">Add to cart</a></p>
+                                        <p class="btn-details">
+                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="btn btn-primary btn-sm">More details</a></p>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% cycle "" "" "" "</div></div><div class='item'><div class='row'>" %}
+                        {% endfor %}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
 <!-- end of coupons carousel -->
 
 <!-- latest products carousel -->
-<div class="listcarousel container">
-	<h2 class="text-success">Latest Products</h2>
-	<hr/>
-	<div class="carousel slide" id="latestproductscarousel">
-		<div class="carousel-inner">
-		<!-- sample thumbnail carousel images -->
-		    <div class="item active">
-		        <div class="row">
-				{% for product in latest_products %}
-						<div class="col-md-3 column productbox thumbnail">
-							{% for img in product.productimage_set.all %}
-								{% if img.featured %}
-							    	<img src="{{ MEDIA_URL }}{{ img.image }}" class="img-responsive" alt="{{ product.title }}"/>
-								{% endif %}
-						    {% endfor %}
-						    <div class="producttitle">{{ product.title }}</div>
-						    <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">ADD TO CART</a></div><div class="pricetext"> &#8377; {{ product.price }}</div></div>
-						</div>
-						{% cycle "" "" "" "</div></div><div class='item'><div class='row'>" %}
-					{% endfor %} 	
-			        </div><!--/row-fluid-->
-			    </div><!--/item-->
-			<!-- end of sample thumbnail carousel images -->    
-		</div><!-- end of carousel inner -->
-
-	    <a class="left carousel-control" href="#latestproductscarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-	    <a class="right carousel-control" href="#latestproductscarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>		
-	</div><!-- end of carousel -->
-</div><!-- end of list carousel -->
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-9">
+                <h3 class="text-danger">Latest Products</h3>
+            </div>
+            <div class="col-md-3">
+                <!-- Controls -->
+                <div class="controls pull-right hidden-xs">
+                    <a class="left fa fa-chevron-left btn btn-danger" href="#carousel-example"
+                        data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a><a class="right fa fa-chevron-right btn btn-danger" href="#carousel-example"
+                            data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                    	{% for product in latest_products %}
+                        <div class="col-sm-3">
+                            <div class="col-item">
+                                <div class="photo">
+                                	{% for img in product.productimage_set.all %}
+                                		{% if img.featured %}
+                                    	<img src="{{ MEDIA_URL }}{{ img.image }}" class="img-responsive" alt="{{ product.title }}" />
+                                		{% endif %}
+                                	{% endfor %}
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-md-12">
+                                            <h5>{{ product.title }}</h5>
+                                            <h5 class="price-text-color">&#8377; {{ product.price }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add">
+                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="btn btn-primary btn-sm">Add to cart</a></p>
+                                        <p class="btn-details">
+                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="btn btn-primary btn-sm">More details</a></p>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% cycle "" "" "" "</div></div><div class='item'><div class='row'>" %}
+                        {% endfor %}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
 <!-- end of latest products carousel -->
 
 <!-- featured products carousel -->
-<div class="listcarousel container">
-	<h2 class="text-success">Featured Products</h2>
-	<hr/>
-	<div class="carousel slide" id="featuredproductscarousel">
-		<div class="carousel-inner">
-		<!-- sample thumbnail carousel images -->
-		    <div class="item active">
-		        <div class="row">
-				{% for product in featured_products %}
-						<div class="col-md-3 column productbox thumbnail">
-							{% for img in product.productimage_set.all %}
-								{% if img.featured %}
-							    	<img src="{{ MEDIA_URL }}{{ img.image }}" class="img-responsive" alt="{{ product.title }}"/>
-								{% endif %}
-						    {% endfor %}
-						    <div class="producttitle">{{ product.title }}</div>
-						    <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-success btn-sm" role="button">ADD TO CART</a></div><div class="pricetext"> &#8377; {{ product.price }}</div></div>
-						</div>
-						{% cycle "" "" "" "</div></div><div class='item'><div class='row'>" %}
-					{% endfor %} 	
-			        </div><!--/row-fluid-->
-			    </div><!--/item-->
-			<!-- end of sample thumbnail carousel images -->    
-		</div><!-- end of carousel inner -->
-
-	    <a class="left carousel-control" href="#featuredproductscarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-	    <a class="right carousel-control" href="#featuredproductscarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>		
-	</div><!-- end of carousel -->
-</div><!-- end of list carousel -->
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-9">
+                <h3 class="text-primary">Featured Products</h3>
+            </div>
+            <div class="col-md-3">
+                <!-- Controls -->
+                <div class="controls pull-right hidden-xs">
+                    <a class="left fa fa-chevron-left btn btn-primary" href="#carousel-example"
+                        data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a><a class="right fa fa-chevron-right btn btn-primary" href="#carousel-example"
+                            data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                    	{% for product in featured_products %}
+                        <div class="col-sm-3">
+                            <div class="col-item">
+                                <div class="photo">
+                                	{% for img in product.productimage_set.all %}
+                                		{% if img.featured %}
+                                    	<img src="{{ MEDIA_URL }}{{ img.image }}" class="img-responsive" alt="{{ product.title }}" />
+                                		{% endif %}
+                                	{% endfor %}
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-md-12">
+                                            <h5>{{ product.title }}</h5>
+                                            <h5 class="price-text-color">&#8377; {{ product.price }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add">
+                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="btn btn-primary btn-sm">Add to cart</a></p>
+                                        <p class="btn-details">
+                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="btn btn-primary btn-sm">More details</a></p>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% cycle "" "" "" "</div></div><div class='item'><div class='row'>" %}
+                        {% endfor %}                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
 <!-- end of featured products carousel -->
 {% endblock %}

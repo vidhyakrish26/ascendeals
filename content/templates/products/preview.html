@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+	{{ product.title }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-lg-9">
+		<ol class="breadcrumb">
+			<li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li><a href="{% url 'catalog_preview' product.category.catalog.slug %}">{{ product.category.catalog.title }}</a></li>
+			<li><a href="{% url 'category_view' catalog=product.category.catalog.slug slug=product.category.slug %}">{{ product.category.title }}</a></li>
+			<li><a href="{% url 'products_view' category=product.category.catalog.slug store=product.store.slug %}">{{ product.store.title }}</a></li>
+			<li><a href="{% url 'product_preview' product.slug %}">{{ product.title }}</a></li>
+		</ol>
+
+		<div class="row">
+			<div class="col-md-4">
+				{% for img in product.productimage_set.all %}
+					{% if img.featured %}
+					<div class="thumbnail">
+						<img id="img_01" src="{{ MEDIA_URL }}{{ img.image }}" title="{{ product.title }}" class="img-responsive" data-zoom-image="{{ MEDIA_URL }}{{ img.image }}">
+					</div>
+					{% endif %}
+				{% endfor %}
+				<div class="row" id="gal1">
+					{% for img in product.productimage_set.all %}
+						<div class="col-sm-3">
+							<div class="thumbnail">
+							    <a data-image="{{ MEDIA_URL }}{{ img.image }}" data-zoom-image="{{ MEDIA_URL }}{{ img.image }}" href="#">  
+							        <img id="img_01" src="{{ MEDIA_URL }}{{ img.image }}" class="img-responsive">  
+							    </a>  
+						    </div>
+					    </div>
+					{% endfor %}
+				</div>				
+			</div>
+			<div class="col-md-8">
+				<h4 class="text-success"><a href="{% url 'product_preview' product.slug %}">{{ product.title }}</a></h4>
+				<div class="row">
+					<div class="col-md-8">
+						<h5 class="price-text-color">&#8377; {{ product.price }}</h5>
+					</div>
+					<div class="col-md-4">
+						<ol class="breadcrumb">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+							<li><a href="#"><i class="fa fa-google"></i></a></li>
+						</ol>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 pull-right">
+						<div class="col-md-6">
+							
+						</div>
+						<div class="col-md-6">
+							<div class="pull-right">
+								<span><i class="glyphicon glyphicon-star"></i></span>
+								<span><i class="glyphicon glyphicon-star"></i></span>
+								<span><i class="glyphicon glyphicon-star"></i></span>
+								<span><i class="glyphicon glyphicon-star"></i></span>
+								<span><i class="glyphicon glyphicon-star"></i></span>						
+								<span class="separator"></span>
+								<a href="#">Add Review</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					{{ product.description|linebreaks }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-3">
+
+	</div>
+</div>
+{% endblock %}

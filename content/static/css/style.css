@@ -1,5 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Fira+Sans);
 
+#maincontent {
+    background: none;
+}
+
 #catalogbar, .dropdown-menu {
 	background: #FF6600;
 }
@@ -22,42 +26,9 @@
 }
 
 body {
-	background: url("/static/images/bg3.jpg");
+	background: none;
 	font-family: 'Fira Sans', sans-serif;
 }
-
-/** Thumbnail carousel */
-
-.listcarousel .carousel {
-	margin-bottom: 0;
-	padding: 0 40px 30px 40px;
-}
-
-.listcarousel .carousel-control.left {
-	left: -60px;
-	background: none;
-}
-.listcarousel .carousel-control.right {
-	right: -60px;
-	background: none;
-}
-
-.listcarousel .carousel-indicators {
-	right: 50%;
-	top: auto;
-	bottom: 0px;
-	margin-right: -19px;
-}
-
-.listcarousel .carousel-indicators li {
-	/*background: #c0c0c0;*/
-}
-
-.listcarousel .carousel-indicators .active {
-	/*background: #333333;*/
-}
-
-/** End of thumbnail carousel */
 
 body > .container {
   padding: 60px 15px 0;
@@ -98,4 +69,112 @@ code {
 .pricetext {
 	font-weight:bold;
 	font-size:1.4em;
+}
+
+/** product carousel */
+
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+.col-item
+{
+    border: 1px solid #E1E1E1;
+    border-radius: 5px;
+    background: #FFF;
+}
+.col-item .photo img
+{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.col-item .info
+{
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    margin-top: 1px;
+}
+
+.col-item:hover .info {
+    background-color: #F5F5DC;
+}
+.col-item .price
+{
+    /*width: 50%;*/
+    float: left;
+    margin-top: 5px;
+}
+
+.col-item .price h5
+{
+    line-height: 20px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.price-text-color
+{
+    color: #219FD1;
+}
+
+.col-item .info .rating
+{
+    color: #777;
+}
+
+.col-item .rating
+{
+    /*width: 50%;*/
+    float: left;
+    font-size: 17px;
+    text-align: right;
+    line-height: 52px;
+    margin-bottom: 10px;
+    height: 52px;
+}
+
+.col-item .separator
+{
+    border-top: 1px solid #E1E1E1;
+}
+
+.clear-left
+{
+    clear: left;
+}
+
+.col-item .separator p
+{
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.col-item .separator p i
+{
+    margin-right: 5px;
+}
+.col-item .btn-add
+{
+    width: 50%;
+    float: left;
+}
+
+.col-item .btn-add
+{
+    border-right: 1px solid #E1E1E1;
+}
+
+.col-item .btn-details
+{
+    width: 50%;
+    float: left;
+    padding-left: 10px;
+}
+.controls
+{
+    margin-top: 20px;
+}
+[data-slide="prev"]
+{
+    margin-right: 10px;
 }

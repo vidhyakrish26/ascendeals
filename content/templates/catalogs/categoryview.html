@@ -5,5 +5,40 @@
 {% endblock %}
 
 {% block content %}
+<div class="row">
+	<div class="col-lg-9">
+		<ol class="breadcrumb">
+			<li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li><a href="{% url 'catalog_preview' catalog.slug %}">{{ catalog.title }}</a></li>
+			<li><a href="{% url 'category_view' catalog=catalog.slug slug=category.slug %}">{{ category.title }}</a></li>
+		</ol>
 
+		<div class="row">
+			<h3 class="text-success"><a href="{% url 'category_view' catalog=catalog.slug slug=category.slug %}">{{ category.title }}</a></h3>
+		</div>
+
+		<hr/>
+
+		<div class="row">
+				{% for store in category.stores.all %}
+				<div class="col-sm-3 col-md-3">
+					<div class="thumbnail">
+                    	<a href="{% url 'products_view' category=category.slug store=store.slug %}" class=""><img src="{{ MEDIA_URL }}{{ store.logo }}" alt="{{ store.title }}" class="img-responsive"></a>
+                    	<a href="{% url 'products_view' category=category.slug store=store.slug %}" class=""><h4 class="text-success">{{ store.title }}</h4></a>
+                    </div>                    
+				</div>
+		        {% cycle "" "" "" "</div><hr/><div class='row'>" %}
+  	        	{% endfor %}
+		</div>
+	</div>
+	<div class="col-lg-3">
+		<div class="list-group">
+			<h4 class="list-group-item list-group-item-info">Stores</h4>
+			{% for store in category.stores.all %}
+				<a href="{% url 'products_view' category=category.slug store=store.slug %}" class="list-group-item">{{ store.title }}</a>
+			{% endfor %}
+		</div>
+	</div>
+</div>
 {% endblock %}
+

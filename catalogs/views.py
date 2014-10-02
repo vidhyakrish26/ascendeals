@@ -10,9 +10,10 @@ def preview(request, slug):
 	return render(request, template, context)
 
 
-def categoryview(request, slug):
+def categoryview(request, catalog, slug):
+	basecatalog = Catalog.objects.get(slug=catalog, active=True)
 	catalogs = Catalog.objects.filter(active=True)
-	category = Category.objects.filter(slug=slug, active=True)
-	context = {"catalogs":catalogs,"category":category}
+	category = Category.objects.get(slug=slug, active=True)	
+	context = {"catalog": basecatalog, "catalogs":catalogs,"category":category}
 	template = "catalogs/categoryview.html"
 	return render(request, template, context)	

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+	{{ store.slug }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-lg-9">
+		<ol class="breadcrumb">
+			<li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li><a href="{% url 'catalog_preview' category.catalog.slug %}">{{ category.catalog.title }}</a></li>
+			<li><a href="{% url 'category_view' catalog=category.catalog.slug slug=category.slug %}">{{ category.title }}</a></li>
+			<li><a href="{% url 'products_view' category=category.catalog.slug store=store.slug %}">{{ store.title }}</a></li>
+		</ol>
+
+		<div class="row">
+			<h3 class="text-success"><a href="{% url 'products_view' category=category.catalog.slug store=store.slug %}">{{ store.title }}</a></h3>
+		</div>
+
+		<hr/>
+
+		<div class="row">
+        	{% for product in products %}
+            <div class="col-sm-3">
+                <div class="col-item">
+                    <div class="photo">
+                    	{% for img in product.productimage_set.all %}
+                    		{% if img.featured %}
+                            <a href="{% url 'product_preview' product.slug %}">
+                        	<img src="{{ MEDIA_URL }}{{ img.image }}" class="img-responsive" alt="{{ product.title }}" />
+                            </a>
+                    		{% endif %}
+                    	{% endfor %}
+                    </div>
+                    <div class="info">
+                        <div class="row">
+                            <div class="price col-md-12">
+                                <h5><a href="{% url 'product_preview' product.slug %}">{{ product.title }}</a></h5>
+                                <h5 class="price-text-color">&#8377; {{ product.price }}</h5>
+                            </div>
+                        </div>
+                        <div class="separator clear-left">
+                            <p class="btn-add">
+                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="btn btn-success btn-xs">Add to cart</a></p>
+                            <p class="btn-details">
+                                <i class="fa fa-list"></i><a href="{% url 'product_preview' product.slug %}" class="btn btn-success btn-xs">More...</a></p>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% cycle "" "" "" "</div><div class='row'>" %}
+            {% endfor %}                        			
+		</div>
+	</div>
+	<div class="col-lg-3">
+		<div class="list-group">
+			<h4 class="list-group-item list-group-item-info">Products</h4>
+
+		</div>
+	</div>
+</div>
+{% endblock %}
+
