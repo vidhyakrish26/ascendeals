@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+	Search - {{ term }}
+{% endblock %}
+
+{% block content %}
+        
+    <div class="row">
+        <div class="col-md-3 left-menu">
+        <div class="">
+          <ul>
+            {% for cat in catalogs %}
+              <li><a href="{% url 'catalog_preview' cat.slug %}">{{ cat.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    
+    <div class="col-md-9">
+		<div class="row">
+		    <div class="col-md-12">
+		    	<h3><a href="/s/?q={{ term }}">{{ term }}</a></h3>
+			    <div class="breadcrumbs">
+				    <ul class="breadcrumb">
+	                    <li><a href="/"><span class="glyphicon glyphicon-home"></span></a> <span class="divider"></span></li>
+	                    <li><a href="#">Search</a></li>
+	                    <li class="active"><a href="/s/?q={{ term }}">{{ term }}</a></li>
+	                </ul>
+				</div>
+			</div>			
+		</div>
+
+	    <div class="row">
+	        {% for product in products %}
+	        <div class="col-md-4">
+	          <div class="product">
+	            {% for img in product.productimage_set.all %}
+	              {% if img.featured %}
+	              <a href="{% url 'product_preview' product.slug %}"><img alt="{{ product.title }}" src="{{ MEDIA_URL }}{{ img.image }}"></a>
+	              {% endif %}
+	            {% endfor %}
+	          <div class="name">
+	            <a href="{% url 'product_preview' product.slug %}">{{ product.title }}</a>
+	            </div>
+	            <div class="price">
+	            <p>&#8377; {{ product.price }}</p>
+	            </div>
+	        </div>
+	      </div>
+	      {% cycle "" "" "</div><div class='row'>" %}
+	      {% endfor %}          
+	    </div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="pagination pull-right">
+				  <li><a href="#">&laquo;</a></li>
+				  <li class="active"><a href="#">1</a></li>
+				  <li><a href="#">2</a></li>
+				  <li><a href="#">3</a></li>
+				  <li><a href="#">4</a></li>
+				  <li><a href="#">5</a></li>
+				  <li><a href="#">&raquo;</a></li>
+				</ul>
+			</div>
+		</div>	    
+	</div>
+</div>
+
+{% endblock %}

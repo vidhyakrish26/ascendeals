@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from .models import Product, ProductImage
 from catalogs.models import Catalog, Category
@@ -26,6 +28,19 @@ def productsview(request, category, store):
 def preview(request, slug):
 	catalogs = Catalog.objects.filter(active=True)
 	product = Product.objects.get(slug=slug, active=True)
-	context = {"product": product, "catalogs":catalogs}
+	products = Product.objects.filter(store=product.store, category=product.category)	
+	context = {"product": product, "catalogs":catalogs, "products": products}
 	template = "products/preview.html"
 	return render(request, template, context)	
+
+def search(request):
+	term = request.GET.get("q")
+	catalogs = Catalog.objects.filter(active=True)
+	if(term):
+		products = Product.objects.filter(active=True, title__icontains=term)
+		context = {"products":products, "catalogs":catalogs, "term":term}
+		template = "products/search.html"
+	else:
+		return HttpResponseReditect(reverse('product_home'))
+
+	return render(request, template, context)

@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^category/(?P<catalog>[\w-]+)/(?P<slug>[\w-]+)/$', 'catalogs.views.categoryview', name='category_view'),
     url(r'^products/(?P<category>[\w-]+)/(?P<store>[\w-]+)/$', 'products.views.productsview', name='products_view'),
     url(r'^product/(?P<slug>[\w-]+)/$', 'products.views.preview', name='product_preview'),
+    url(r'^s/$', 'products.views.search', name='product_search'),
     url(r'^$', 'products.views.home', name='product_home'),
 )
 

@@ -1,82 +1,197 @@
 {% extends 'base.html' %}
 
 {% block head_title %}
-	{{ product.title }}
+	{{ product.slug }}
 {% endblock %}
 
 {% block content %}
-<div class="row">
-	<div class="col-lg-9">
-		<ol class="breadcrumb">
-			<li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
-			<li><a href="{% url 'catalog_preview' product.category.catalog.slug %}">{{ product.category.catalog.title }}</a></li>
-			<li><a href="{% url 'category_view' catalog=product.category.catalog.slug slug=product.category.slug %}">{{ product.category.title }}</a></li>
-			<li><a href="{% url 'products_view' category=product.category.catalog.slug store=product.store.slug %}">{{ product.store.title }}</a></li>
-			<li><a href="{% url 'product_preview' product.slug %}">{{ product.title }}</a></li>
-		</ol>
+    <ul class="breadcrumb prod">
+	    <li><a href="/">Home</a> <span class="divider"></span></li>
+	    <li><a href="{% url 'catalog_preview' product.category.catalog.slug %}">{{ product.category.catalog.title }}</a></li>
+	    <li><a href="{% url 'category_view' catalog=product.category.catalog.slug slug=product.category.slug %}">{{ product.category.title }}</a></li>
+	    <li><a href="{% url 'products_view' category=product.category.slug store=product.store.slug %}">{{ product.store.title }}</a></li>
+		<li class="active"><a href="{% url 'product_preview' product.slug %}">{{ product.title }}</a></li>
+    </ul>
 
-		<div class="row">
-			<div class="col-md-4">
-				{% for img in product.productimage_set.all %}
-					{% if img.featured %}
-					<div class="thumbnail">
-						<img id="img_01" src="{{ MEDIA_URL }}{{ img.image }}" title="{{ product.title }}" class="img-responsive" data-zoom-image="{{ MEDIA_URL }}{{ img.image }}">
-					</div>
-					{% endif %}
+	<div class="row product-info">
+	    <div class="col-md-6">
+			{% for img in product.productimage_set.all %}	
+			{% if img.featured %}
+			<div class="image">
+				<a class="cloud-zoom" rel="adjustX: 0, adjustY:0" id='zoom1' href="{{ MEDIA_URL }}{{ img.image }}" title="{{ product.title }}"><img src="{{ MEDIA_URL }}{{ img.image }}" title="{{ product.title }}" alt="{{ product.title }}" id="image" /></a>
+			</div>	
+			{% endif %}
+			{% endfor %}
+			<div class="image-additional">
+				{% for img in product.productimage_set.all %}	
+				<a title="{{ product.title }}" rel="useZoom: 'zoom1', smallImage: '{{ MEDIA_URL }}{{ img.image }}'" class="cloud-zoom-gallery" href="{{ MEDIA_URL }}{{ img.image }}"><img alt="{{ product.title }}" title="{{ product.title }}" src="{{ MEDIA_URL }}{{ img.image }}" ></a>
 				{% endfor %}
-				<div class="row" id="gal1">
-					{% for img in product.productimage_set.all %}
-						<div class="col-sm-3">
-							<div class="thumbnail">
-							    <a data-image="{{ MEDIA_URL }}{{ img.image }}" data-zoom-image="{{ MEDIA_URL }}{{ img.image }}" href="#">  
-							        <img id="img_01" src="{{ MEDIA_URL }}{{ img.image }}" class="img-responsive">  
-							    </a>  
-						    </div>
-					    </div>
-					{% endfor %}
-				</div>				
-			</div>
-			<div class="col-md-8">
-				<h4 class="text-success"><a href="{% url 'product_preview' product.slug %}">{{ product.title }}</a></h4>
-				<div class="row">
-					<div class="col-md-8">
-						<h5 class="price-text-color">&#8377; {{ product.price }}</h5>
-					</div>
-					<div class="col-md-4">
-						<ol class="breadcrumb">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-							<li><a href="#"><i class="fa fa-google"></i></a></li>
-						</ol>
-					</div>
+			</div>			
+		</div>
+	    <div class="col-md-6">
+			<h1>{{ product.title }}</h1>
+			    <div class="line"></div>
+					<ul>
+						<li><span>Brand:</span> <a href="#">Shop Online</a></li>
+						<li><span>Product Code:</span> Product 001</li>
+						<li><span>Availability: </span>In Stock</li>
+					</ul>
+				<div class="price">
+					Price <span class="strike">&#8377; {{ product.sales_price }}</span> <strong>&#8377; {{ product.price }}</strong>
 				</div>
-				<div class="row">
-					<div class="col-md-12 pull-right">
-						<div class="col-md-6">
-							
-						</div>
-						<div class="col-md-6">
-							<div class="pull-right">
-								<span><i class="glyphicon glyphicon-star"></i></span>
-								<span><i class="glyphicon glyphicon-star"></i></span>
-								<span><i class="glyphicon glyphicon-star"></i></span>
-								<span><i class="glyphicon glyphicon-star"></i></span>
-								<span><i class="glyphicon glyphicon-star"></i></span>						
-								<span class="separator"></span>
-								<a href="#">Add Review</a>
+				<!--
+					<span class="price-tax">Ex Tax: $400.00</span>
+					    <div class="control-group">
+						<label class="control-label">Color<span class="required">*</span></label>
+				            <div class="controls">
+								<select>
+									<option>Please Select...</option>
+									<option>Blue</option>
+									<option>Red</option>
+									<option>Black</option>
+								</select>
 							</div>
 						</div>
+					    <div class="control-group">
+								<label class="control-label">Size<span class="required">*</span></label>
+				            <div class="controls">
+								<select>
+									<option>Please Select...</option>
+									<option>XXS</option>
+									<option>XS</option>
+									<option>S</option>
+								</select>
+							</div>
+						</div> -->
+
+				<select class="selectpicker" data-width="150px">
+					<option>Red</option>
+					<option>Blue</option>
+					<option>Green</option>
+				</select>
+				<select class="selectpicker" data-width="150px">
+					<option>180 cm</option>
+					<option>160 cm</option>
+					<option>140 cm</option>
+				</select>
+
+				<div class="line"></div>
+
+				<form class="form-inline">
+					<button class="btn btn-primary" type="button">Add to Cart</button>
+					<label>Qty:</label> <input type="text" placeholder="1" class="col-md-1">
+				</form>
+				
+				<div class="tabs">
+				<ul class="nav nav-tabs" id="myTab">
+					<li class="active"><a href="#home">Description</a></li>
+					<li><a href="#profile">Specification</a></li>
+					<li><a href="#messages">Reviews</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="home">{{ product.description|linebreaks }}</div>
+					<div class="tab-pane" id="profile">
+						<table class="table specs">
+						    <tr>
+							    <th>Color</th>
+							    <th>Size</th>
+							    <th>Weight</th>
+						    </tr>
+						    <tr>
+							    <td>Blue</td>
+							    <td>XS</td>
+							    <td>1.00</td>
+						    </tr>
+						    <tr>
+							    <th>Composition</th>
+							    <th>Sleeve</th>
+							    <th>Care</th>
+						    </tr>
+						    <tr>
+							    <td>100% Cotton</td>
+							    <td> Long Sleeve</td>
+							    <td>IRON AT 110ºC MAX</td>
+						    </tr>								
+				        </table>
+					</div>
+					<div class="tab-pane" id="messages">
+					    <p>There are no reviews yet, would you like to <a href="#review_btn">submit yours?</a></p>
+						<h3>Be the first to review “Blue Dress” </h3>
+					<form>
+						<fieldset>
+							<label>Name<span class="required">*</span></label>
+							<input type="text" placeholder="Name">
+							<label>Email<span class="required">*</span></label>
+							<input type="text" placeholder="Email">		
+							<label class="rating">Rating</label>
+                            <img alt="rating" src="/static/images/stars-5.png">								
+						</fieldset>
+					</form>
+						<label>Your Review<span class="required">*</span></label>
+						<textarea rows="3"></textarea>
+					<p id="review_btn">
+						<button class="btn btn-default" type="button">Submit Review</button>
+					</p>
 					</div>
 				</div>
-				<div>
-					{{ product.description|linebreaks }}
 				</div>
-			</div>
 		</div>
 	</div>
-	<div class="col-lg-3">
+	
+	<h3 class="related">Related products</h3>
+	
+	<div class="row">
+		<div class="col-md-12">
+		{% for prod in products %}		
+		    <div class="col-md-3">
+			    <div class="product">
+			    	{% for img in prod.productimage_set.all %}
+				    	{% if img.featured %}
+				    	<a href="{% url 'product_preview' prod.slug %}"><img alt="{{ prod.title }}" src="{{ MEDIA_URL }}{{ img.image }}"></a>
+				    	{% endif %}
+				    {% endfor %}
+					<div class="name">
+				    <a href="{% url 'product_preview' prod.slug %}">{{ prod.title }}</a>
+				    </div>
+				    <div class="price">
+				    <p>&#8377; {{ prod.price }}</p>
+				    </div>
+				</div>
+			</div>		
+		{% cycle '' '' '' '</div></div><div class="row">' %}
+		{% endfor %}
+		</div>
+	</div>	
 
+<div id="social_band">
+	<div class="container">
+	<div class="row">
+	<div id="social_about" class="col-md-4">
+		<h3>About</h3>
+		<div>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br/><br/> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.			</div>
 	</div>
+	<div id="social_twitter" class="col-md-4">
+		<h3>Twitter</h3>
+		<div>
+			<ul id="twitter_update_list"><li>Twitter feed loading</li></ul>			
+			<script type="text/javascript" src="/static/js/twitterFetcher_v9_min.js"></script>
+			<script>twitterFetcher.fetch('256524641194098690', 'twitter_update_list', 2, true, true, false);</script> 
+
+			<!--
+			<script type="text/javascript" src="https://api.twitter.com/1/statuses/user_timeline.json?screen_name=NicoleThemes&amp;callback=twitterCallback2&amp;count=3"></script>			
+			<a href="http://twitter.com/#!/NicoleThemes" id="twitter_follow">Follow us on twitter</a>
+			-->
+		</div>
+	</div>
+	<div id="social_facebook" class="col-md-4">
+		<h3>Facebook</h3>
+		<div>
+		<div id="fb-root"></div>
+		<script></script>
+		<div class="fb-like-box" data-href="https://www.facebook.com/201498429982413" data-width="300" data-color-scheme="light"  data-show-faces="true" data-stream="false" data-header="false" data-border-color="#ffffff" show_border=false></div>
+		</div>		
+	</div>
+</div>
 </div>
 {% endblock %}
